@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- ZBRAMOUSSE
     <string name="twitterKey">cnOn8MdjtbjMfyDFZsqSuJFtA</string>
     <string name="twitterSecret">XzQRiHH47a8GIw2mB3R7LE4RJaYO3jk15jkAwZsVtU4JA3YCT5</string>
+    -->
+    <string name="twitterKey">vHFvDRk0js2aEYEwX8k5NLGwb</string>
+    <string name="twitterSecret">5vG2mepAvB4AYoRsfwSxM2TNnsH7iFsqkYMCLIEjAy8KTyqHjp</string>
 </resources>
