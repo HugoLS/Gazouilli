@@ -29,6 +29,7 @@ import com.twitter.sdk.android.core.TwitterSession;
 import com.twitter.sdk.android.core.identity.TwitterLoginButton;
 import com.twitter.sdk.android.core.models.Search;
 import com.twitter.sdk.android.core.models.Tweet;
+import com.twitter.sdk.android.core.services.SearchService;
 import com.twitter.sdk.android.core.services.StatusesService;
 import com.twitter.sdk.android.tweetui.CompactTweetView;
 import com.twitter.sdk.android.tweetui.FixedTweetTimeline;
@@ -49,7 +50,7 @@ import twitter4j.TwitterFactory;
 import twitter4j.conf.Configuration;
 import twitter4j.conf.ConfigurationBuilder;
 
-public class GazListActivity extends Activity {
+public class GazListActivity extends ListActivity {
 
     ListView listView;
 
@@ -74,7 +75,7 @@ public class GazListActivity extends Activity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.inflateMenu(R.menu.menu_gaz_list);
 
-        listView = (ListView) findViewById(R.id.mylist);
+        listView = getListView();
 
         Log.d("MYAPP",listView.toString());
 
@@ -86,15 +87,15 @@ public class GazListActivity extends Activity {
         super.onResume();
 
         TwitterApiClient twitterApiClient = TwitterCore.getInstance().getApiClient();
-// Can also use Twitter directly: Twitter.getApiClient()
-        StatusesService statusesService = twitterApiClient.getStatusesService();
-        statusesService.userTimeline(null, "enssat", null, 20L, null, null, true, null, null, new Callback<List<Tweet>>() {
+        SearchService service = twitterApiClient.getSearchService();
+        service.tweets("enssat", null, null, null, null, null, null, null, null, null, new Callback<Search>() {
             @Override
-            public void success(Result<List<Tweet>> listResult) {
-                final List<Tweet> tweets = listResult.data;
-                for (Tweet tweet : tweets) {
+            public void success(Result<Search> result) {
+                final List<Tweet> tweets = result.data.tweets;
+                /*for (Tweet tweet : tweets) {
                     Log.d("MYAPP", tweet.text);
-                }
+                }*/
+
 
                 final FixedTweetTimeline timeline = new FixedTweetTimeline.Builder()
                         .setTweets(tweets)
@@ -118,7 +119,7 @@ public class GazListActivity extends Activity {
 
             @Override
             public void failure(TwitterException e) {
-                Log.e("Twitter", e.toString() + ", " + e.getMessage());
+
             }
         });
     }
