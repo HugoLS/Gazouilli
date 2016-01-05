@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.twitter.sdk.android.Twitter;
@@ -53,6 +54,8 @@ import twitter4j.conf.ConfigurationBuilder;
 public class GazListActivity extends ListActivity {
 
     ListView listView;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,7 +99,6 @@ public class GazListActivity extends ListActivity {
                     Log.d("MYAPP", tweet.text);
                 }*/
 
-
                 final FixedTweetTimeline timeline = new FixedTweetTimeline.Builder()
                         .setTweets(tweets)
                         .build();
@@ -105,16 +107,28 @@ public class GazListActivity extends ListActivity {
                         .setTimeline(timeline)
                         .build();
                 //adapter.getTweets().addAll(tweets);
-                //
+
                 listView.setAdapter(adapter);
                 //setListAdapter(adapter);
                 //adapter.notifyDataSetChanged();
-                Log.d("MYAPP", "all items enabled : " + adapter.areAllItemsEnabled());
 
+                Log.d("MYAPP", "all items enabled : " + adapter.areAllItemsEnabled());
 
                 Log.d("MYAPP", "adapter length : " + adapter.getCount());
 
                 Log.d("MYAPP", "zbra : " + listView.getAdapter().getCount());
+
+                // Ne fonctionne pas mais mérite d'être poussé
+                /*listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        Log.d("MYAPP","click on tweet");
+                    }
+
+                });*/
+
+
             }
 
             @Override
