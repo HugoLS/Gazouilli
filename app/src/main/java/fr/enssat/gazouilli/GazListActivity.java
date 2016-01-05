@@ -103,9 +103,12 @@ public class GazListActivity extends ListActivity {
                         .setTweets(tweets)
                         .build();
 
-                final TweetTimelineListAdapter adapter = new TweetTimelineListAdapter.Builder(getApplicationContext())
+                /*final TweetTimelineListAdapter adapter = new CustomTweetTimelineListAdapter.Builder(getApplicationContext())
                         .setTimeline(timeline)
-                        .build();
+                        .build();*/
+
+                final TweetTimelineListAdapter adapter = new CustomTweetTimelineListAdapter(getApplicationContext(), timeline);
+
                 //adapter.getTweets().addAll(tweets);
 
                 listView.setAdapter(adapter);
@@ -136,6 +139,14 @@ public class GazListActivity extends ListActivity {
 
             }
         });
+    }
+
+    @Override
+    protected void onListItemClick(ListView l, View v, int position, long id) {
+        //TextView t = (TextView) v.findViewById(R.id.tweetTitle);
+        //t.setText("Tweet Clicked");
+
+        Log.d("MYAPP","click on tweet");
     }
 
     @Override
