@@ -43,4 +43,8 @@ dependencies {
         transitive = true;
     }
     compile files('libs/twitter4j-core-4.0.1.jar')
+
+    compile 'com.google.android.gms:play-services-gcm:8.1.0'
+    compile 'com.google.api-client:google-api-client:1.20.0'
+    compile 'com.google.api-client:google-api-client-android:1.20.0'
 }
