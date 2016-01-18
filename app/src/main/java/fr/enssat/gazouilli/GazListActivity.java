@@ -139,6 +139,9 @@ public class GazListActivity extends ListActivity {
 
             }
         });
+
+        GcmRegistrationAsyncTask tsk = new GcmRegistrationAsyncTask(this);
+        tsk.execute();
     }
 
     @Override
