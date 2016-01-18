@@ -9,7 +9,7 @@
     android:paddingBottom="@dimen/activity_vertical_margin"
 
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:showIn="@layout/activity_tweet" tools:context="fr.enssat.gazouilli.TweetActivity"
+    tools:showIn="@layout/activity_tweet" tools:context=".activity.TweetActivity"
     android:orientation="vertical">
 
     <LinearLayout

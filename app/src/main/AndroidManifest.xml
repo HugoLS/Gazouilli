@@ -10,8 +10,17 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme" >
+        <receiver
+            android:name=".gcm.GcmBroadcastReceiver"
+            android:permission="com.google.android.c2dm.permission.SEND" >
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+                <category android:name="fr.enssat.gazouilli.gcm" />
+            </intent-filter>
+        </receiver>
+        <service android:name=".gcm.GcmIntentService" />
         <activity
-            android:name=".GazListActivity"
+            android:name=".activity.GazListActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>
@@ -20,7 +29,7 @@
             android:name="io.fabric.ApiKey"
             android:value="ef49d6c1a487e1c672ef98a5381cfa520e8cc6ff" />
 
-        <activity android:name=".ConnectionActivity" >
+        <activity android:name=".activity.ConnectionActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -28,7 +37,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".TweetActivity"
+            android:name=".activity.TweetActivity"
             android:label="@string/title_activity_tweet"
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>

@@ -1,20 +1,21 @@
-package fr.enssat.gazouilli;
+package fr.enssat.gazouilli.adapter;
 
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.twitter.sdk.android.core.models.Tweet;
 import com.twitter.sdk.android.tweetui.Timeline;
 import com.twitter.sdk.android.tweetui.TweetTimelineListAdapter;
 
+import fr.enssat.gazouilli.activity.TweetActivity;
+
 /**
  * Created by Adrien-ENSSAT on 05/01/2016.
  */
-class CustomTweetTimelineListAdapter extends TweetTimelineListAdapter {
+public class CustomTweetTimelineListAdapter extends TweetTimelineListAdapter {
 
     public CustomTweetTimelineListAdapter(Context context, Timeline<Tweet> timeline) {
         super(context, timeline);

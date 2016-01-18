@@ -1,4 +1,4 @@
-package fr.enssat.gazouilli;
+package fr.enssat.gazouilli.activity;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -13,6 +13,7 @@ import com.twitter.sdk.android.core.TwitterException;
 import com.twitter.sdk.android.core.TwitterSession;
 import com.twitter.sdk.android.core.identity.TwitterLoginButton;
 
+import fr.enssat.gazouilli.R;
 import io.fabric.sdk.android.Fabric;
 
 public class ConnectionActivity extends AppCompatActivity {

@@ -1,4 +1,4 @@
-package fr.enssat.gazouilli;
+package fr.enssat.gazouilli.gcm;
 
 import android.content.Context;
 import android.os.AsyncTask;
