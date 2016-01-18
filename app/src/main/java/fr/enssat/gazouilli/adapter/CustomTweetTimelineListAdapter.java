@@ -10,7 +10,7 @@ import com.twitter.sdk.android.core.models.Tweet;
 import com.twitter.sdk.android.tweetui.Timeline;
 import com.twitter.sdk.android.tweetui.TweetTimelineListAdapter;
 
-import fr.enssat.gazouilli.activity.TweetActivity;
+import fr.enssat.gazouilli.activity.GazActivity;
 
 /**
  * Created by Adrien-ENSSAT on 05/01/2016.
@@ -40,7 +40,7 @@ public class CustomTweetTimelineListAdapter extends TweetTimelineListAdapter {
                 //Toast.makeText(context, tweetId, Toast.LENGTH_SHORT).show();
                 Log.d("MYAPP","click on tweet : " + tweetId);
 
-                Intent intent = new Intent( v.getContext(), TweetActivity.class);
+                Intent intent = new Intent( v.getContext(), GazActivity.class);
                 Log.d("MYAPP", "intent created");
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 intent.putExtra("tweetid",tweetId);
