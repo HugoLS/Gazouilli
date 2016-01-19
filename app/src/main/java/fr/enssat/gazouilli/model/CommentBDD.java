@@ -5,6 +5,9 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by Hugo on 19/01/2016.
  */
@@ -70,15 +73,16 @@ public class CommentBDD {
         return bdd.delete(TABLE_COMMENT, COL_ID + " = " + id, null);
     }
 
-    public Comment getCommentsWithTweetID(String tweetId){
+    public List<Comment> getCommentsWithTweetID(String tweetId){
         //Récupère dans un Cursor les valeur correspondant aux comments contenus dans la BDD (ici on sélectionne les comments grâce au tweet id)
         Cursor c = bdd.query(TABLE_COMMENT, new String[] {COL_ID, COL_ID_TWEET, COL_TEXT, COL_AUTHOR}, COL_ID_TWEET + " LIKE \"" + tweetId +"\"", null, null, null, null);
         return cursorToComment(c);
     }
 
     //Cette méthode permet de convertir un cursor en un livre
-    private Comment cursorToComment(Cursor c){
+    private List<Comment> cursorToComment(Cursor c){
         //si aucun élément n'a été retourné dans la requête, on renvoie null
+        List<Comment> comments = new ArrayList<Comment>();
         if (c.getCount() == 0)
             return null;
 
@@ -86,11 +90,12 @@ public class CommentBDD {
         c.moveToFirst();
         //On créé un livre
         Comment comment = new Comment(c.getString(NUM_COL_ID_TWEET),c.getString(NUM_COL_AUTHOR),c.getString(NUM_COL_TEXT));
+        comments.add(comment);
         //On ferme le cursor
         c.close();
 
         //On retourne le livre
-        return comment;
+        return comments;
     }
 
 }
