@@ -32,6 +32,7 @@ import fr.enssat.gazouilli.R;
 import fr.enssat.gazouilli.adapter.CommentListAdapter;
 import fr.enssat.gazouilli.gcm.GcmSendAsyncTask;
 import fr.enssat.gazouilli.model.Comment;
+import fr.enssat.gazouilli.model.CommentBDD;
 
 public class GazActivity extends AppCompatActivity {
 
@@ -47,12 +48,20 @@ public class GazActivity extends AppCompatActivity {
 
         ListView comListView = (ListView) findViewById(R.id.comList);
 
-// get data from the table by the ListAdapter
+        final long tweetid = getIntent().getLongExtra("tweetid",510908133917487104L);
 
-        List<Comment> coms = new ArrayList<Comment>();
-        coms.add(new Comment("x","toto","Zbra"));
-        coms.add(new Comment("y","tata","Pamplemousse"));
+// get data from the table by the ListAdapter
+        CommentBDD bdd = new CommentBDD(this);
+        bdd.open();
+
+
+        List<Comment> coms = bdd.getCommentsWithTweetID(""+tweetid);
+        Log.d("MYAPP",""+(coms != null));
+        bdd.close();
+        //coms.add(new Comment("x","toto","Zbra"));
+        //coms.add(new Comment("y","tata","Pamplemousse"));
         CommentListAdapter comAdapter = new CommentListAdapter(this, R.layout.comment_row, coms);
+        //comAdapter.
 
         comListView.setAdapter(comAdapter);
 
@@ -61,7 +70,7 @@ public class GazActivity extends AppCompatActivity {
         final LinearLayout myLayout
                 = (LinearLayout) findViewById(R.id.tweet_layout);
 
-        final long tweetid = getIntent().getLongExtra("tweetid",510908133917487104L);
+
 
         TweetUtils.loadTweet(tweetid, new Callback<Tweet>() {
             @Override
@@ -86,6 +95,10 @@ public class GazActivity extends AppCompatActivity {
                 params[1] = editText.getText().toString();
                 params[2] = "toto";
 
+                CommentBDD bdd = new CommentBDD(v.getContext());
+                bdd.open();
+                bdd.insertComment(new Comment(params[0],params[2],params[1]));
+                bdd.close();
                 GcmSendAsyncTask task = new GcmSendAsyncTask(v.getContext());
                 task.execute(params);
 

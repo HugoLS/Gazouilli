@@ -12,6 +12,9 @@ import com.google.android.gms.gcm.GoogleCloudMessaging;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import fr.enssat.gazouilli.model.Comment;
+import fr.enssat.gazouilli.model.CommentBDD;
+
 /**
  * Created by Adrien on 18/01/2016.
  */
@@ -34,7 +37,16 @@ public class GcmIntentService extends IntentService {
             if (GoogleCloudMessaging.MESSAGE_TYPE_MESSAGE.equals(messageType)) {
                 Logger.getLogger("GCM_RECEIVED").log(Level.INFO, extras.toString());
 
-                showToast(extras.getString("message"));
+                String message = extras.getString("message");
+                showToast(message);
+
+                String[] parts = message.split(",");
+                Comment com = new Comment(parts[0],parts[2],parts[1]);
+
+                CommentBDD bdd = new CommentBDD(this);
+                bdd.open();
+                bdd.insertComment(com);
+                bdd.close();
             }
         }
         GcmBroadcastReceiver.completeWakefulIntent(intent);
