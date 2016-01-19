@@ -11,7 +11,9 @@
         android:text="Medium Text"
         android:id="@+id/comment_author"
         android:textColor="#474f96"
-        android:layout_margin="10px" />
+        android:layout_margin="10px"
+        android:textStyle="bold"
+        android:textSize="24px" />
 
     <TextView
         android:layout_width="match_parent"
@@ -21,5 +23,6 @@
         android:id="@+id/comment_text"
         android:layout_marginLeft="40px"
         android:layout_marginRight="40px"
-        android:layout_marginBottom="20px" />
+        android:layout_marginBottom="20px"
+        android:textSize="20px" />
 </LinearLayout>

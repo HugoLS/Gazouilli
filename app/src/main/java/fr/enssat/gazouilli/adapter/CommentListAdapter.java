@@ -52,6 +52,12 @@ public class CommentListAdapter extends ArrayAdapter<Comment> {
             }
         }
 
+        if (position%2 == 0){
+            v.setBackgroundColor(v.getResources().getColor(R.color.colorCommentPairLine));
+        }else{
+            v.setBackgroundColor(v.getResources().getColor(R.color.colorCommentImpairLine));
+        }
+
         return v;
     }
 }
