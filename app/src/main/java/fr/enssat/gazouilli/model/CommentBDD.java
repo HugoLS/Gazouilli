@@ -76,9 +76,10 @@ public class CommentBDD {
     public List<Comment> getCommentsWithTweetID(String tweetId){
         //Récupère dans un Cursor les valeur correspondant aux comments contenus dans la BDD (ici on sélectionne les comments grâce au tweet id)
         Cursor c = bdd.query(TABLE_COMMENT, new String[] {COL_ID, COL_ID_TWEET, COL_TEXT, COL_AUTHOR}, COL_ID_TWEET + " LIKE \"" + tweetId +"\"", null, null, null, null);
-        return cursorToComment(c);
+        List<Comment> comments = new ArrayList<Comment>();
+        return comments;//cursorToComment(c);
     }
-    
+
     private List<Comment> cursorToComment(Cursor c){
         //si aucun élément n'a été retourné dans la requête, on renvoie null
         List<Comment> comments = new ArrayList<Comment>();
