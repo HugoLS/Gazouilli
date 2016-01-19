@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.ListAdapter;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.gilles.myapplication.backend.messaging.Messaging;
@@ -23,9 +25,13 @@ import com.twitter.sdk.android.tweetui.TweetUtils;
 import com.twitter.sdk.android.tweetui.TweetView;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import fr.enssat.gazouilli.R;
+import fr.enssat.gazouilli.adapter.CommentListAdapter;
 import fr.enssat.gazouilli.gcm.GcmSendAsyncTask;
+import fr.enssat.gazouilli.model.Comment;
 
 public class GazActivity extends AppCompatActivity {
 
@@ -39,7 +45,16 @@ public class GazActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        ListView comListView = (ListView) findViewById(R.id.comList);
 
+// get data from the table by the ListAdapter
+
+        List<Comment> coms = new ArrayList<Comment>();
+        coms.add(new Comment("x","toto","Zbra"));
+        coms.add(new Comment("y","tata","Pamplemousse"));
+        CommentListAdapter comAdapter = new CommentListAdapter(this, R.layout.comment_row, coms);
+
+        comListView.setAdapter(comAdapter);
 
 
 
