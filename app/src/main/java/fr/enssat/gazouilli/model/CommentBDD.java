@@ -85,16 +85,12 @@ public class CommentBDD {
         //Sinon on se place sur le premier élément
         c.moveToFirst();
         //On créé un livre
-        Comment comment = new Comment(c.getInt(NUM_COL_ID_TWEET),c.getString(NUM_COL_AUTHOR),c.getString(NUM_COL_TEXT));
-        //on lui affecte toutes les infos grâce aux infos contenues dans le Cursor
-        livre.setId();
-        livre.setIsbn(c.getString(NUM_COL_ISBN));
-        livre.setTitre(c.getString(NUM_COL_TITRE));
+        Comment comment = new Comment(c.getString(NUM_COL_ID_TWEET),c.getString(NUM_COL_AUTHOR),c.getString(NUM_COL_TEXT));
         //On ferme le cursor
         c.close();
 
         //On retourne le livre
-        return livre;
-    }*/
+        return comment;
+    }
 
 }
