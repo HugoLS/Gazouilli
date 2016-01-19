@@ -78,23 +78,20 @@ public class CommentBDD {
         Cursor c = bdd.query(TABLE_COMMENT, new String[] {COL_ID, COL_ID_TWEET, COL_TEXT, COL_AUTHOR}, COL_ID_TWEET + " LIKE \"" + tweetId +"\"", null, null, null, null);
         return cursorToComment(c);
     }
-
-    //Cette méthode permet de convertir un cursor en un livre
+    
     private List<Comment> cursorToComment(Cursor c){
         //si aucun élément n'a été retourné dans la requête, on renvoie null
         List<Comment> comments = new ArrayList<Comment>();
         if (c.getCount() == 0)
             return null;
 
-        //Sinon on se place sur le premier élément
-        c.moveToFirst();
-        //On créé un livre
-        Comment comment = new Comment(c.getString(NUM_COL_ID_TWEET),c.getString(NUM_COL_AUTHOR),c.getString(NUM_COL_TEXT));
-        comments.add(comment);
-        //On ferme le cursor
+        for (c.moveToFirst(); !c.isAfterLast(); c.moveToNext()) {
+            Comment comment = new Comment(c.getString(NUM_COL_ID_TWEET),c.getString(NUM_COL_AUTHOR),c.getString(NUM_COL_TEXT));
+            comments.add(comment);
+        }
         c.close();
 
-        //On retourne le livre
+        //On retourne la liste de comment
         return comments;
     }
 
