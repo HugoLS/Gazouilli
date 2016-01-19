@@ -19,6 +19,12 @@
         android:orientation="vertical">
 
     </LinearLayout>
+    <ListView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+
+    </ListView>
+
 
     <EditText
         android:layout_width="fill_parent"
