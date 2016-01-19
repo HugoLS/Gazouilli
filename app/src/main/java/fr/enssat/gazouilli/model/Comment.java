@@ -9,6 +9,8 @@ public class Comment {
     private String author;
     private String text;
 
+    public Comment(){}
+
     public Comment(String tweetId, String author, String text) {
         this.tweetId = tweetId;
         this.author = author;
