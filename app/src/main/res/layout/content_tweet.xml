@@ -30,7 +30,14 @@
     <EditText
         android:layout_width="fill_parent"
         android:layout_height="100dp"
-        android:id="@+id/comEditText" />
+        android:id="@+id/comEditText"
+        android:hint="Votre commentaire ..."
+        android:textColorHighlight="#32407f"
+        android:textColorLink="#2b3497"
+        android:singleLine="false"
+        android:background="#d0d0d0"
+        android:paddingStart="10px"
+        android:paddingEnd="10px" />
 
     <Button
         android:layout_width="wrap_content"
