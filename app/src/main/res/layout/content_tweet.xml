@@ -11,40 +11,52 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:showIn="@layout/activity_tweet" tools:context=".activity.GazActivity"
     android:orientation="vertical">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <LinearLayout
+                android:id="@+id/tweet_layout"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
-    <LinearLayout
-        android:id="@+id/tweet_layout"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
+                <ListView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/comList">
 
-    </LinearLayout>
-    <ListView
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/comList">
-
-    </ListView>
+                </ListView>
+            </LinearLayout>
 
 
-    <EditText
-        android:layout_width="fill_parent"
-        android:layout_height="100dp"
-        android:id="@+id/comEditText"
-        android:hint="Votre commentaire ..."
-        android:textColorHighlight="#32407f"
-        android:textColorLink="#2b3497"
-        android:singleLine="false"
-        android:background="#d0d0d0"
-        android:paddingStart="10px"
-        android:paddingEnd="10px" />
+            <EditText
+                android:layout_width="fill_parent"
+                android:layout_height="100dp"
+                android:id="@+id/comEditText"
+                android:hint="Votre commentaire ..."
+                android:textColorHighlight="#32407f"
+                android:textColorLink="#2b3497"
+                android:singleLine="false"
+                android:background="#d0d0d0"
+                android:paddingStart="10px"
+                android:paddingEnd="10px" />
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Commenter"
-        android:id="@+id/comButton"
-        android:layout_gravity="right" />
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Commenter"
+                android:id="@+id/comButton"
+                android:layout_gravity="right" />
+        </LinearLayout>
+    </ScrollView>
 
 
 </LinearLayout>

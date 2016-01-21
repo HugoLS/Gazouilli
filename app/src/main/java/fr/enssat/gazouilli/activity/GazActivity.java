@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -48,7 +49,7 @@ public class GazActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        ListView comListView = (ListView) findViewById(R.id.comList);
+        final ListView comListView = (ListView) findViewById(R.id.comList);
 
         final long tweetid = getIntent().getLongExtra("tweetid",510908133917487104L);
 
@@ -57,12 +58,12 @@ public class GazActivity extends AppCompatActivity {
         bdd.open();
 
 
-        List<Comment> coms = bdd.getCommentsWithTweetID(""+tweetid);
+        final List<Comment> coms = bdd.getCommentsWithTweetID(""+tweetid);
         Log.d("MYAPP",""+(coms != null));
         bdd.close();
         //coms.add(new Comment("x","toto","Zbra"));
         //coms.add(new Comment("y","tata","Pamplemousse"));
-        CommentListAdapter comAdapter = new CommentListAdapter(this, R.layout.comment_row, coms);
+        final CommentListAdapter comAdapter = new CommentListAdapter(this, R.layout.comment_row, coms);
         //comAdapter.
 
         comListView.setAdapter(comAdapter);
@@ -99,15 +100,56 @@ public class GazActivity extends AppCompatActivity {
                 params[1] = editText.getText().toString();
                 params[2] = user;
 
-                CommentBDD bdd = new CommentBDD(v.getContext());
-                bdd.open();
-                bdd.insertComment(new Comment(params[0],params[2],params[1]));
-                bdd.close();
+                //CommentBDD bdd = new CommentBDD(v.getContext());
+                //bdd.open();
+                Comment com = new Comment(params[0],params[2],params[1]);
+                coms.add(com);
+                comAdapter.notifyDataSetChanged();
+                setListViewHeightBasedOnChildren(comListView);
+
+                editText.setText("");
+                editText.clearFocus();
+
+                //bdd.insertComment(com);
+                //bdd.close();
                 GcmSendAsyncTask task = new GcmSendAsyncTask(v.getContext());
                 task.execute(params);
 
             }
         });
+
+        setListViewHeightBasedOnChildren(comListView);
+
+    }
+
+    public static void setListViewHeightBasedOnChildren(ListView listView)
+    {
+        ListAdapter listAdapter = listView.getAdapter();
+        if (listAdapter == null)
+            return;
+
+        int desiredWidth = View.MeasureSpec.makeMeasureSpec(listView.getWidth(), View.MeasureSpec.UNSPECIFIED);
+        int totalHeight=0;
+        View view = null;
+
+        for (int i = 0; i < listAdapter.getCount(); i++)
+        {
+            view = listAdapter.getView(i, view, listView);
+
+            if (i == 0)
+                view.setLayoutParams(new ViewGroup.LayoutParams(desiredWidth,
+                        LinearLayout.LayoutParams.MATCH_PARENT));
+
+            view.measure(desiredWidth, View.MeasureSpec.UNSPECIFIED);
+            totalHeight += view.getMeasuredHeight();
+
+        }
+
+        ViewGroup.LayoutParams params = listView.getLayoutParams();
+        params.height = totalHeight + ((listView.getDividerHeight()) * (listAdapter.getCount()));
+
+        listView.setLayoutParams(params);
+        listView.requestLayout();
 
     }
 
