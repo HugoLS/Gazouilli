@@ -17,9 +17,11 @@ import com.google.api.client.extensions.android.http.AndroidHttp;
 import com.google.api.client.extensions.android.json.AndroidJsonFactory;
 import com.google.api.client.googleapis.services.AbstractGoogleClientRequest;
 import com.google.api.client.googleapis.services.GoogleClientRequestInitializer;
+import com.twitter.sdk.android.Twitter;
 import com.twitter.sdk.android.core.Callback;
 import com.twitter.sdk.android.core.Result;
 import com.twitter.sdk.android.core.TwitterException;
+import com.twitter.sdk.android.core.TwitterSession;
 import com.twitter.sdk.android.core.models.Tweet;
 import com.twitter.sdk.android.tweetui.TweetUtils;
 import com.twitter.sdk.android.tweetui.TweetView;
@@ -91,9 +93,11 @@ public class GazActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String[] params = new String[3];
+                TwitterSession session = Twitter.getSessionManager().getActiveSession();
+                String user = session.getUserName();
                 params[0] = ""+tweetid;
                 params[1] = editText.getText().toString();
-                params[2] = "toto";
+                params[2] = user;
 
                 CommentBDD bdd = new CommentBDD(v.getContext());
                 bdd.open();

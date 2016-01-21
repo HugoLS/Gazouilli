@@ -33,8 +33,6 @@ public class GazListActivity extends ListActivity {
 
     ListView listView;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,6 +46,8 @@ public class GazListActivity extends ListActivity {
         TwitterAuthToken authToken = session.getAuthToken();
         String token = authToken.token;
         String secret = authToken.secret;
+
+        String username = session.getUserName();
 
         Log.d("TESTAUTH", token);
         Log.d("TESTAUTH", secret);
