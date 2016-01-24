@@ -61,7 +61,7 @@ public class GcmSendAsyncTask extends AsyncTask<String,Void,Void> {
 
     @Override
     protected void onPostExecute(Void param) {
-        Toast.makeText(context, "message sent", Toast.LENGTH_LONG).show();
+        //Toast.makeText(context, "message sent", Toast.LENGTH_LONG).show();
         Logger.getLogger("MSG SENT").log(Level.INFO, "message sent");
     }
 }

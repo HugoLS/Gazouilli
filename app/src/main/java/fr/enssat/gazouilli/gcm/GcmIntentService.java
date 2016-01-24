@@ -38,7 +38,7 @@ public class GcmIntentService extends IntentService {
                 Logger.getLogger("GCM_RECEIVED").log(Level.INFO, extras.toString());
 
                 String message = extras.getString("message");
-                showToast(message);
+                //showToast(message);
 
                 String[] parts = message.split(",");
                 Comment com = new Comment(parts[0],parts[2],parts[1]);
